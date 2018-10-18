@@ -19,14 +19,16 @@ public class PhilosopherV1 implements Runnable {
     public int state;
     public int posx;
     public int posy;
+    private int id;
     
     //Philosopher constructor assigns the forks
-    public PhilosopherV1(Object leftFork,Object rightFork,int posx, int posy){
+    public PhilosopherV1(Object leftFork,Object rightFork,int posx, int posy, int id){
         this.leftFork = leftFork;
         this.rightFork = rightFork;
         this.state = 0;
         this.posx = posx;
         this.posy = posy;
+        this.id = id;
     }
     
     private void doAction(String action) throws InterruptedException{
@@ -51,25 +53,28 @@ public class PhilosopherV1 implements Runnable {
         put_down_left_fork();
         put_down_right_fork();
         */
+        
+        this.id = Integer.parseInt(Thread.currentThread().getName().replaceAll("\\D", "")) - 1;
+    
         try{
             while(true){
                 
                 //think
-                this.state = 0;
+                GlobalClass.states[this.id] = 0;
                 doAction(System.nanoTime() + ": Thinking");
                 
                 //pick_up_left_fork
                 //synchronized makes sure only this thread will have access
                 //to this specific fork while the Philosopher is using it
                 synchronized(leftFork){
-                    this.state = 1;
+                    GlobalClass.states[this.id] = 1;
                     doAction(System.nanoTime() + ": Picked up left fork");
                     
                     //pick_up_right_fork
                     synchronized(rightFork){
                         doAction(System.nanoTime() + ": Picked up right fork");
                         
-                        this.state = 2;
+                        GlobalClass.states[this.id] = 2;
                         //eat
                         doAction(System.nanoTime() + ": Eating");
                     }
@@ -80,7 +85,7 @@ public class PhilosopherV1 implements Runnable {
                 
                 //put_down_left_fork
                 doAction(System.nanoTime() + ": Put down left fork");
-                this.state = 0;
+                GlobalClass.states[this.id] = 0;
             }            
         } catch(InterruptedException e){
             System.out.println("Something went wrong... " + Thread.currentThread().getName() + " Interrupted");

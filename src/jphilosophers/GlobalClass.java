@@ -9,9 +9,8 @@ package jphilosophers;
  *
  * @author lukka
  */
-public class Dinner {
-    public static void main(String[] args) {
-        VisualizationV1.main("jphilosophers.VisualizationV1");
-    }
-   
+public class GlobalClass {
+    public static int[] states;
+    public static int mutex;
+    public static int[] semaphores;
 }

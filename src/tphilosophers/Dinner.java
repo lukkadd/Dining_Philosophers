@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jphilosophers;
+package tphilosophers;
+
+import processing.core.*;
 
 /**
  *
@@ -11,7 +13,9 @@ package jphilosophers;
  */
 public class Dinner {
     public static void main(String[] args) {
-        VisualizationV1.main("jphilosophers.VisualizationV1");
+        Table t = new Table();
+        for(int i = 0; i < 5; i++){
+            new Philosopher(i,t).run();
+        }
     }
-   
 }

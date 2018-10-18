@@ -25,6 +25,9 @@ public class VisualizationV1 extends processing.core.PApplet{
         philosophers = new PhilosopherV1[5];
         Object[] forks = new Object[5];
         
+        //initializing global variables
+        GlobalClass.states = new int[5];
+        
         //initializing Fork objects
         for(int i = 0; i < forks.length; i++){
             forks[i] = new Object();
@@ -36,7 +39,8 @@ public class VisualizationV1 extends processing.core.PApplet{
                     forks[i],
                     forks[(i+1) % forks.length],
                     (width / 2) + (int) (200*Math.cos( (i * 2 * Math.PI / 5) - Math.PI / 2)),
-                    (height / 2) + (int) (200*Math.sin( (i * 2 * Math.PI / 5) - Math.PI / 2))
+                    (height / 2) + (int) (200*Math.sin( (i * 2 * Math.PI / 5) - Math.PI / 2)),
+                    i
             );
             
             //creating the philosopher thread and running it
@@ -52,13 +56,13 @@ public class VisualizationV1 extends processing.core.PApplet{
         ellipse(width/2,height/2,280,280);
         rect(mouseX,mouseY,10,10);
         for(int i = 0; i < philosophers.length; i++){
-            renderPhilosopher(philosophers[i]);
+            renderPhilosopher(philosophers[i], GlobalClass.states[i]);
         }
     }
     
-    private void renderPhilosopher(PhilosopherV1 p){
+    private void renderPhilosopher(PhilosopherV1 p, int state){
         pushStyle();
-            switch(p.state){
+            switch(state){
                 case 0:
                 fill(100,100,100);
                 break;
