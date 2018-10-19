@@ -5,6 +5,9 @@
  */
 package tphilosophers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author lukka
@@ -12,7 +15,7 @@ package tphilosophers;
 
 public class Philosopher implements Runnable{
     
-    final int MAX_TIME = 100;
+    final int MAX_TIME = 2000;
     
     private int id;
     private Table table;
@@ -31,14 +34,22 @@ public class Philosopher implements Runnable{
 //      Run for eternity
         while(true){
             
-            //think
-            think((int)Math.random() * MAX_TIME);
+            try {
+                //think
+                think((long) (Math.random() * MAX_TIME));
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Philosopher.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             //take forks
             table.takeForks(this.id);
             
-            //eat
-            eat((int)Math.random() * MAX_TIME);
+            try {
+                //eat
+                eat((long) (Math.random() * MAX_TIME));
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Philosopher.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             //put down forks
             table.putForks(this.id);
@@ -46,19 +57,11 @@ public class Philosopher implements Runnable{
 
     }
     
-    public void think(int time){
-        try{
+    public void think(long time)throws InterruptedException{
             Thread.sleep(time);
-        }catch(InterruptedException e){
-            System.out.println(e.getMessage());
-        }
     }
     
-    public void eat(int time){
-        try{
-            Thread.sleep(time);
-        }catch(InterruptedException e){
-            System.out.println(e.getMessage());
-        }
+    public void eat(long time) throws InterruptedException{
+        Thread.sleep(time);
     }
 }

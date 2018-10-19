@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jphilosophers;
+package tphilosophers;
 
+import processing.core.*;
 /**
  *
  * @author lukka
  */
-public class Dinner {
-//    public static void main(String[] args) {
-//        VisualizationV1.main("jphilosophers.VisualizationV1");
-//    }
-   
+public class Main {
+    public static void main(String[] args) {
+        Dinner.main("tphilosophers.Dinner");
+    }
 }
