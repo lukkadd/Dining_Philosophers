@@ -65,17 +65,14 @@ public class Dinner extends processing.core.PApplet{
             d1 = 200;
             d2 = 150;
         }
-        int p1x = width/2 + (int)(d2*Math.cos( (fork * 2 * Math.PI / 5) - 3*Math.PI / 4));
-        int p1y = height/2 + (int)(d2*Math.sin( (fork * 2 * Math.PI / 5)- 3*Math.PI / 4));
-        
-        int p2x = width/2 + (int)(d1*Math.cos( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
-        int p2y = height/2 + (int)(d1*Math.sin( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
-        
-        int p3x = width/2 + (int)(d1*Math.cos( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
-        int p3y = height/2 + (int)(d1*Math.sin( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
-        
-        triangle(p1x,p1y,p2x,p2y,p3x,p3y);
-        
-        
+        pushStyle();
+        strokeWeight(3);
+        line(
+                width/2 + (int)(d2*Math.cos( (fork * 2 * Math.PI / 5) - 3*Math.PI / 4)),
+                height/2 + (int)(d2*Math.sin( (fork * 2 * Math.PI / 5)- 3*Math.PI / 4)),
+                width/2 + (int)(d1*Math.cos( (fork * 2 * Math.PI / 5)- 3*Math.PI / 4 )),
+                height/2 + (int)(d1*Math.sin( (fork * 2 * Math.PI / 5)- 3*Math.PI / 4 ))
+                );
+        popStyle();
     }
 }
