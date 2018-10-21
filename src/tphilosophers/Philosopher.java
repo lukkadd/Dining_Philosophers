@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class Philosopher implements Runnable{
     
-    final int MAX_TIME = 2000;
+    final int MAX_TIME = 10000;
     
     private int id;
     private Table table;

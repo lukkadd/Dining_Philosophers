@@ -20,6 +20,7 @@ public class Dinner extends processing.core.PApplet{
     public void setup(){
         t = new Table();
         for(int i = 0; i < 5; i++){
+            t.forks[i] = true;
             Philosopher p = new Philosopher(i,t);
             Thread t = new Thread(p,"Philosopher " + (i+1));
             t.start();
@@ -33,6 +34,7 @@ public class Dinner extends processing.core.PApplet{
         rect(mouseX,mouseY,10,10);
         for(int i = 0; i < t.NUMBER_OF_SEATS; i++){
             renderPhilosopher(i,t.states[i]);
+            renderForks(i,t.forks[i]);
         }
     }
     
@@ -54,5 +56,26 @@ public class Dinner extends processing.core.PApplet{
             rect(px - 30,py-5,60,60,30,30,0,0);
             ellipse(px,py - 15,40,40);
         popStyle();
+    }
+    
+    private void renderForks(int fork, boolean taken){
+        int d1 = 100;
+        int d2 = 50;
+        if (!taken){
+            d1 = 200;
+            d2 = 150;
+        }
+        int p1x = width/2 + (int)(d2*Math.cos( (fork * 2 * Math.PI / 5) - 3*Math.PI / 4));
+        int p1y = height/2 + (int)(d2*Math.sin( (fork * 2 * Math.PI / 5)- 3*Math.PI / 4));
+        
+        int p2x = width/2 + (int)(d1*Math.cos( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
+        int p2y = height/2 + (int)(d1*Math.sin( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
+        
+        int p3x = width/2 + (int)(d1*Math.cos( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
+        int p3y = height/2 + (int)(d1*Math.sin( (fork * 2 * Math.PI / 5 )- 3*Math.PI / 4));
+        
+        triangle(p1x,p1y,p2x,p2y,p3x,p3y);
+        
+        
     }
 }
